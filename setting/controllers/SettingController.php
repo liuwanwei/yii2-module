@@ -3,8 +3,8 @@
 namespace buddysoft\modules\setting\controllers;
 
 use Yii;
-use backend\modules\setting\models\Setting;
-use backend\modules\setting\models\SettingSearch;
+use buddysoft\modules\setting\models\Setting;
+use buddysoft\modules\setting\models\SettingSearch;
 use buddysoft\widget\controllers\WebController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
