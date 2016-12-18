@@ -36,18 +36,6 @@ CREATE TABLE `setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `setting`
---
-
-INSERT INTO `setting` (`id`, `name`, `key`, `value`, `description`, `weight`) VALUES
-(1, '二星使者收益', 'kclass_sz2_earning', '43', '二星使者共3次收益机会', 0),
-(2, '三星使者收益', 'kclass_sz3_earning', '31', '三星使者共9次收益机会', 1),
-(3, '一星大使收益', 'kclass_ds1_earning', '48', '一星大使共27次收益机会', 2),
-(4, '二星大使收益', 'kclass_ds2_earning', '38', '二星大使共81次收益机会', 3),
-(5, '三星大使收益', 'kclass_ds3_earning', '28', '三星大使共243次收益机会', 4),
-(6, '升级爱心大使要求', 'grade_ds_requirements', '1-3-9', '要求分为 1-3-9 和 1-3-3-9 型两种，请严格按照格式设置', -1);
-
---
 -- Indexes for dumped tables
 --
 

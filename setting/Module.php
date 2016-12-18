@@ -2,7 +2,7 @@
 
 namespace buddysoft\modules\setting;
 
-use buddysoft\module\setting\models\Setting;
+use buddysoft\modules\setting\models\Setting;
 
 class Module extends \yii\base\Module{
 
