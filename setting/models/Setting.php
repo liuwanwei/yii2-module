@@ -55,28 +55,28 @@ class Setting extends \yii\db\ActiveRecord
     }
 
     public function beforeValidate(){
-        if (isset(Yii::$app->params['defaultSettings'])) {
-            $defaultSettings = Yii::$app->params['defaultSettings'];
-            foreach ($defaultSettings as $setting) {
-                if ($setting['key'] == $this->key  && isset($setting['options'])) {
+        $module = \buddysoft\modules\setting\Module::getInstance();
+        $defaultSettings = $module->defaultSettings;
 
-                    $options = $setting['options'];
+        foreach ($defaultSettings as $setting) {
+            if ($setting['key'] == $this->key  && isset($setting['options'])) {
 
-                    if (isset($options['validator'])) {
+                $options = $setting['options'];
 
-                        $validator = $options['validator'];
-                        if (isset($options['params'])) {
-                            $params = $options['params'];
-                        }else{
-                            $params = [];
-                        }
+                if (isset($options['validator'])) {
 
-                        $validator = Validator::createValidator($validator, $this, 'value', $params);
-                        $ret = $validator->validate($this->value);
-                        if (false === $ret) {
-                            $this->addError('value', $validator->message);
-                            return false;
-                        }
+                    $validator = $options['validator'];
+                    if (isset($options['params'])) {
+                        $params = $options['params'];
+                    }else{
+                        $params = [];
+                    }
+
+                    $validator = Validator::createValidator($validator, $this, 'value', $params);
+                    $ret = $validator->validate($this->value);
+                    if (false === $ret) {
+                        $this->addError('value', $validator->message);
+                        return false;
                     }
                 }
             }
