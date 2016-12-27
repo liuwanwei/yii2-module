@@ -40,6 +40,8 @@ class SettingController extends WebController
      */
     public function actionIndex()
     {
+        Setting::prepareDefaultSettings();
+
         $searchModel = new SettingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
