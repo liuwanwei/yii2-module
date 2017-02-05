@@ -57,6 +57,22 @@ class Setting extends \yii\db\ActiveRecord
 
     public function beforeValidate(){
         $module = Module::getInstance();
+
+        /**
+         *
+         * 应用层直接使用 Setting.php 类时，由于并不是通过 module/action-id
+         * 方式访问，所以无法获取到模块对象。所以尝试通过模块名字获取模块对象。
+         * 如果应用层 modules 中配置的模块名字不是 setting，就会访问失败。
+         *
+         */
+        if (empty($module)) {            
+            $module = \Yii::$app->getModule('setting');
+            if (empty($module)) {
+                Yii::error('模块参数获取失败，将不会对参数进行验证：' . $this->value);
+                return;
+            }
+        }        
+
         $defaultSettings = $module->defaultSettings;
 
         foreach ($defaultSettings as $setting) {
@@ -124,5 +140,19 @@ class Setting extends \yii\db\ActiveRecord
     public static function intValue($key){
         $model = static::findOne(['key' => $key]);
         return empty($model) ? -1 : intval($model->value);
+    }
+
+    // 快捷修改某个属性接口
+    public static function updateValue($key, $value){
+        $model = static::findOne(['key' => $key]);
+        if (empty($model)) {
+            $model = new Setting();
+            $model->key = $key;
+        }
+
+        // 所有属性的最终存储方式都必须是字符串
+        $model->value = strval($value);
+        $ret = $model->save();
+        return $ret;
     }
 }
