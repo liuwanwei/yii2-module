@@ -52,6 +52,7 @@ class Setting extends \yii\db\ActiveRecord
             'value' => '值',
             'description' => '描述',
             'weight' => '排序',
+            'updatedAt' => '更新时间',
         ];
     }
 

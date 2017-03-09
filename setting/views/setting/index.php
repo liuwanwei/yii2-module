@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -26,18 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             // 'key',
-            'value:ntext',
+            // 'value:ntext',
+            [
+                'attribute' => 'value',
+                'value' => function($model){
+                    return StringHelper::truncate($model->value, 8);
+                }
+            ],
             [
                 'attribute' => 'description',
                 'value' => function($model){
-                    return \yii\helpers\StringHelper::truncate($model->description, 16);
+                    return StringHelper::truncate($model->description, 16);
                 }
             ],
-            // 'weight',
+            'updatedAt',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}',
+                'template' => '{view} {update} {delete}',
             ],
         ],
     ]); ?>

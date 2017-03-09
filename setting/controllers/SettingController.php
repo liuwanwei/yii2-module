@@ -69,6 +69,12 @@ class SettingController extends WebController
         }
     }
 
+    public function actionView($id){
+        $model = $this->findModel($id);
+
+        return $this->render('view', ['model' => $model]);
+    }
+
     /**
      * Updates an existing Setting model.
      * If update is successful, the browser will be redirected to the 'index' page.
