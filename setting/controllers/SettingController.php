@@ -5,7 +5,7 @@ namespace buddysoft\modules\setting\controllers;
 use Yii;
 use buddysoft\modules\setting\models\Setting;
 use buddysoft\modules\setting\models\SettingSearch;
-use buddysoft\modules\SettingHelper;
+use buddysoft\modules\setting\SettingHelper;
 
 use buddysoft\widget\controllers\WebController;
 use yii\web\NotFoundHttpException;

@@ -47,10 +47,10 @@ class Setting extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => '配置项',
-            'keyֵ' => 'key',
-            'value' => '值',
-            'description' => '描述',
+            'name' => '配置项',            
+            'value' => '内容',
+            'keyֵ' => '内部变量',
+            'description' => '功能简介',
             'weight' => '排序',
             'updatedAt' => '更新时间',
         ];

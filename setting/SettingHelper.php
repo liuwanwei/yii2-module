@@ -1,6 +1,6 @@
 <?php
 
-namespace buddysoft\modules;
+namespace buddysoft\modules\setting;
 
 use buddysoft\modules\setting\models\Setting;
 
