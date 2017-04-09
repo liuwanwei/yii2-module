@@ -5,6 +5,8 @@ namespace buddysoft\modules\setting\controllers;
 use Yii;
 use buddysoft\modules\setting\models\Setting;
 use buddysoft\modules\setting\models\SettingSearch;
+use buddysoft\modules\SettingHelper;
+
 use buddysoft\widget\controllers\WebController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -40,7 +42,8 @@ class SettingController extends WebController
      */
     public function actionIndex()
     {
-        Setting::prepareDefaultSettings();
+        // 每次访问配置项列表时，都检查添加默认配置项，以防用户误删
+        SettingHelper::prepareDefaultSettings();
 
         $searchModel = new SettingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

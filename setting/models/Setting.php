@@ -103,34 +103,12 @@ class Setting extends \yii\db\ActiveRecord
         return parent::beforeValidate();
     }
 
-    /**
-     *
-     * 加载默认配置项
-     *
-     * 注意不要放到 Module 的 init 中调用，此时调用时模块初始化未完成，
-     * Module::getInstance() 会返回 null
-     */
-    
-    public static function prepareDefaultSettings(){
-        $module = Module::getInstance();
-        $defaultSettings = $module->defaultSettings;
 
-        // 加载配置文件中定义的配置项信息
-        foreach ($defaultSettings as $setting) {
-            $model = new Setting();
-            $model->load($setting, '');
-
-            // 如果配置项不存在，向数据库中添加
-            $existed = Setting::findOne(['key' => $model->key]);
-            if (empty($existed)) {
-                $model->save();
-            }
-        }       
-    }
 
     /**
      *
      * 快捷访问某个属性入口
+     * Deprecated: 请访问 buddysoft\modules\SettingHelper 获取以下接口
      */
     
     public static function value($key){
