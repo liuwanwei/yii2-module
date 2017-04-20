@@ -4,9 +4,13 @@ use yii\db\Migration;
 
 class m170309_091129_create_setting extends Migration
 {
+    private function tableName(){
+        return 'bs_setting';
+    }
+
     public function up()
     {
-        $this->createTable('setting', [
+        $this->createTable($this->tableName(), [
             'id' => $this->primaryKey(),
             'name' => $this->string(32)->notNull(),
             'key' => $this->string(64)->notNull(),
@@ -19,7 +23,7 @@ class m170309_091129_create_setting extends Migration
 
     public function down()
     {
-        $this->dropTable('setting');
+        $this->dropTable($this->tableName());
         return true;
     }
 

@@ -3,22 +3,34 @@
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\grid\GridView;
+use buddysoft\modules\setting\SettingHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\setting\models\SettingSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '系统参数';
+$setting = SettingHelper::defaultSetting();
+$viewSetting = $setting['setting']['views']['index'];
+if (isset($viewSetting['title'])) {
+    $this->title = $viewSetting['title'];
+}else{
+    $this->title = '系统参数';
+}
+
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="setting-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('添加', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if ($viewSetting['showCreateButton'] === true): ?>
+        <p>
+            <?= Html::a('添加', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>    
+    <?php endif ?>
+    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         // 'filterModel' => $searchModel,

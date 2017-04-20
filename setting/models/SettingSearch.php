@@ -5,6 +5,7 @@ namespace buddysoft\modules\setting\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use buddysoft\modules\setting\SettingHelper;
 
 /**
  * SettingSearch represents the model behind the search form about `backend\modules\setting\models\Setting`.
@@ -56,8 +57,7 @@ class SettingSearch extends Setting
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            $query->where('0=1');
             return $dataProvider;
         }
 
@@ -66,9 +66,14 @@ class SettingSearch extends Setting
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'value', $this->value])
+        $query->andFilterWhere(['like', 'value', $this->value])
             ->andFilterWhere(['like', 'description', $this->description]);
+
+        // 如果定义了字段前缀，只搜索前缀开始的字段
+        $prefix = SettingHelper::keyPrefix();
+        if (! empty($prefix)) {
+            $query->andFilterWhere(['like', 'key', $prefix]);
+        }
 
         return $dataProvider;
     }
