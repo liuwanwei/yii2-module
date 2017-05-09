@@ -22,8 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setting-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php if ($viewSetting['showTitle'] === true): ?>
+        <h1><?= Html::encode($this->title) ?></h1>    
+    <?php endif ?>    
 
     <?php if ($viewSetting['showCreateButton'] === true): ?>
         <p>

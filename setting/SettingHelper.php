@@ -92,7 +92,7 @@ class SettingHelper{
 	 */
 
 	public static function objectWithKey($key){
-		return static::findOne(['key' => $key]);
+		return Setting::findOne(['key' => $key]);
 	}
 	
 	public static function value($key){
