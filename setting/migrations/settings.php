@@ -1,6 +1,18 @@
 <?php
 
 return [
+    // 全局配置
+    'setting' => [
+        // 配置每个界面的参数
+        'views' => [
+            'index' => [
+                'title' => '参数配置',
+                'showTitle' => false,
+                'showCreateButton' => true,
+            ]
+        ],
+    ],
+
     [
         'name' => '演示 in validator',
         'key' => 'grade_sz_share_limit',
