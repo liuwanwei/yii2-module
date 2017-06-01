@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use buddysoft\modules\setting\SettingHelper;
 
@@ -10,23 +11,21 @@ use buddysoft\modules\setting\SettingHelper;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $setting = SettingHelper::defaultSetting();
-$viewSetting = $setting['setting']['views']['index'];
-if (isset($viewSetting['title'])) {
-    $this->title = $viewSetting['title'];
-}else{
-    $this->title = '系统参数';
-}
+$title = ArrayHelper::getValue($setting, 'setting.views.index.title', '系统参数');
+$showTitle = ArrayHelper::getValue($setting, 'setting.views.index.showTitle', true);
+$showCreateButton = ArrayHelper::getValue($setting, 'setting.views.index.showCreateButton', true);
 
+$this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="setting-index">
 
-    <?php if ($viewSetting['showTitle'] === true): ?>
+    <?php if ($showTitle === true): ?>
         <h1><?= Html::encode($this->title) ?></h1>    
     <?php endif ?>    
 
-    <?php if ($viewSetting['showCreateButton'] === true): ?>
+    <?php if ($showCreateButton === true): ?>
         <p>
             <?= Html::a('添加', ['create'], ['class' => 'btn btn-success']) ?>
         </p>    
@@ -34,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

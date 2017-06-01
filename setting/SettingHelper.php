@@ -3,6 +3,7 @@
 namespace buddysoft\modules\setting;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use buddysoft\modules\setting\models\Setting;
 
 class SettingHelper{
@@ -49,11 +50,7 @@ class SettingHelper{
 
 	public static function keyPrefix(){
 		$setting = static::defaultSetting();
-		if (isset($setting['setting']['prefix'])) {
-			return $setting['setting']['prefix'];
-		}else{
-			return null;
-		}
+		return ArrayHelper::getValue($setting, 'setting.prefix', null);
 	}
 
 	/**
@@ -66,7 +63,7 @@ class SettingHelper{
 	
 	public static function prepareDefaultSettings(){
 	    $defaultSetting = static::defaultSetting();
-	    $prefix = $defaultSetting['setting']['prefix'];
+	    $prefix = static::keyPrefix();
 
 	    // 加载配置文件中定义的配置项信息
 	    foreach ($defaultSetting as $setting) {
