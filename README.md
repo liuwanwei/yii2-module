@@ -1,6 +1,6 @@
 # 提高开发效率的一些 Yii2 模块
 
-## 1. setting 模块
+## 1. setting 模块 (deprecated, already moved to Yii2-setting module)
 
 1. 支持通过数组配置应用中用到的内置配置项
 2. 支持在配置项中使用 Yii2 内置的各种 validator
